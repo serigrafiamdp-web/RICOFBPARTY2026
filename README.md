@@ -70,3 +70,9 @@ Released for **Flashparty 2026**.
 ## License / reuse
 
 No explicit software/content license was included in the preserved masters. This repository is published for preservation and technical study. Do not assume that third-party assets or music are freely relicensable.
+
+## Separate project: FPINTRO-TRIBUTE
+
+The Fairlight tribute intro is preserved separately under [`FPINTRO-TRIBUTE/`](FPINTRO-TRIBUTE/). Its current user-designated master is the **12 October 2026 full version** of the intro: [PRG](FPINTRO-TRIBUTE/MASTER_FPINTRO_TRIBUTE.prg) / [ZIP backup](FPINTRO-TRIBUTE/MASTER_FPINTRO_TRIBUTE_12_OCT_2026.zip). The screen **does not switch to black** at the end of the scroll. Druid II and the intro animation continue normally.
+
+This separate tribute project does **not** replace or modify the RicOS / Vicious Circles source snapshot or its September 2026 release archives. See [documentation](FPINTRO-TRIBUTE/README.md).
