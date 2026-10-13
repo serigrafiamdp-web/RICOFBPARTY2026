@@ -82,6 +82,3 @@ Released for **Flashparty 2026**.
 
 No explicit open-source license was included in the preserved masters. Treat this repository as a preservation and technical-study archive unless a license is added later. Do not assume bundled music or ROM material is freely relicensable.
 
-## Separate project
-
-`FPINTRO-TRIBUTE/` is a separate preserved Fairlight tribute intro. It does not replace or modify the RicOS September 2026 masters.
