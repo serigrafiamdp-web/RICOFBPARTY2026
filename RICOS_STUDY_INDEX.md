@@ -54,6 +54,3 @@ For the complete source tree, use the canonical final source ZIP in `archive/`.
 6. precomputed radial/rotating data to reduce runtime CPU load;
 7. PASS/FAIL regression testing across PAL-B, PAL-N, NTSC and NTSC OLD.
 
-## Separate project in the same repository
-
-`FPINTRO-TRIBUTE/` is a separate preserved Fairlight tribute intro and does not replace the September RicOS masters.
