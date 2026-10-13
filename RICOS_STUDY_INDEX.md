@@ -4,7 +4,6 @@ This page is the technical navigation index for the RicOS part of the repository
 
 ## Preservation
 
-- [Archive current status](archive/CURRENT_STATUS.md)
 - [Archive provenance](archive/README.md)
 - [Master provenance and hashes](docs/MASTER_PROVENANCE.md)
 - [Final release information](release/README.md)
