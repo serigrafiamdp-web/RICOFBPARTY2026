@@ -426,6 +426,9 @@ var
     // Se anade al final del bloque de datos; no desplaza ninguna variable previa.
     outro_audio_phase : byte = 0;
     outro_audio_divider : byte = 0;
+    // TEST BLINK 01: contador independiente, 50 ticks logicos = ~1 segundo.
+    // Anadir al final de INTRO_DATA para no desplazar simbolos anteriores.
+    stage13_black_hold : byte = 0;
     @endblock
 
     // SINGLE OCEAN ENGINE: ROM-safe entry bridge; fixed RAM gap.
@@ -4192,8 +4195,16 @@ begin
 end;
 procedure EventoPantallaNegra();
 begin
-    AvanzarSecuenciaVisual();
-    ActualizarAnimacionEnNegro();
+    // TEST BLINK 01: al terminar STAGE 12, NO iniciar STAGE 13
+    // hasta consumir 50 ticks logicos con el VIC oculto.
+    // El SID sigue sonando desde SidRasterIRQ.
+    if show_stage = 12 then begin
+        stage13_black_hold := 50;
+    end
+    else begin
+        AvanzarSecuenciaVisual();
+        ActualizarAnimacionEnNegro();
+    end;
 end;
 procedure AnimarCaracterIndependiente();
 begin
@@ -5677,6 +5688,7 @@ demo_sysinfo_force_entry:
     // STAGE 5
     stage5_scroll_phase := 0;
     // STAGE 13
+    stage13_black_hold := 0;   // TEST BLINK 01: reset en cada reproduccion
     stage13_static_active := 0;
     stage13_ghost_next_line := 116;
     stage13_ghost_fine_scroll := 7;
@@ -6093,6 +6105,17 @@ turbo_time_calc_loop:
             end;
         end
         else begin
+            // TEST BLINK 01: cuenta SOLO ticks visuales validos, no frames
+            // fisicos. Pantalla deshabilitada; IRQ/SID y musica intactos.
+            if stage13_black_hold > 0 then begin
+                vic_d011 := $07;
+                dec(stage13_black_hold);
+                if stage13_black_hold = 0 then begin
+                    AvanzarSecuenciaVisual();
+                    ActualizarAnimacionEnNegro();
+                end;
+            end
+            else begin
             scroll_coarse_event := 0;
             scroll_update_now := 0;
             if scroll_sid_link = 1 then begin
@@ -6353,6 +6376,10 @@ drean_visual_bonus_done:
                                 fine_scroll := 7;
                                 vic_d011 := $17;
                                 PrepararBufferAbajo();
+                                // Ocultar incluso el primer frame del intervalo.
+                                if stage13_black_hold > 0 then begin
+                                    vic_d011 := $07;
+                                end;
                             end;
                         end
                         else begin
@@ -6415,6 +6442,7 @@ drean_visual_bonus_done:
                     AnimarCaracterIndependiente();
                 end;
             end;
+            end; // TEST BLINK 01: fin gate de pantalla negra
         end;
 
         end; // FIX18: demo_visual_do_tick
