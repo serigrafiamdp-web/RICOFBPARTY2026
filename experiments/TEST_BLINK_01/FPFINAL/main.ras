@@ -4962,7 +4962,7 @@ fix46_volume_done:
 fix46_volume_after:
 
         ; Softer ramp: one volume step every 10 PLAY calls.
-        ; 15 steps x 10 PLAYs = 150 PLAYs â 3.0 s at 50 Hz.
+        ; 15 steps x 10 PLAYs = 150 PLAYs ≈ 3.0 s at 50 Hz.
         lda startup_intro_fps
         cmp #$0F
         bcs fix40_music_fade_done
@@ -5116,7 +5116,7 @@ begin
 restart_s_irq_safe_entry:
         sei
         ; Tras detectar S, este punto se alcanza sin CLI intermedio.
-        ; El loader del outro dejÃ³ la musica y raster IRQ detenidos.
+        ; El loader del outro dejó la musica y raster IRQ detenidos.
         ; Asegurar estado silencioso, sin tocar la deteccion ya efectuada.
         lda #$00
         sta $D01A
